@@ -17,20 +17,6 @@
     cmd: gpg --dearmor -o /etc/apt/keyrings/docker.gpg /tmp/docker.asc
     creates: /etc/apt/keyrings/docker.gpg
 
-- name: Ensure Docker keyring is readable by apt
-  ansible.builtin.file:
-    path: /etc/apt/keyrings/docker.gpg
-    mode: "0644"
-
-- name: Verify Docker key is present in keyring
-  ansible.builtin.command: gpg --show-keys --with-colons /etc/apt/keyrings/docker.gpg
-  register: docker_key_check
-  changed_when: false
-
-- name: Show Docker key info
-  ansible.builtin.debug:
-    var: docker_key_check.stdout_lines
-
 - name: Get dpkg architecture
   ansible.builtin.command: dpkg --print-architecture
   register: dpkg_arch

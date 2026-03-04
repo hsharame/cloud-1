@@ -1,0 +1,40 @@
+---
+- name: Define local project path
+  ansible.builtin.set_fact:
+    local_src_dir: "{{ playbook_dir }}/../../srcs"
+
+- name: Ensure deploy directory exists on server
+  ansible.builtin.file:
+    path: /home/ubuntu/inception/
+    state: directory
+    mode: "0755"
+
+- name: Ensure data directories exist on server
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - /home/ubuntu/data
+    - /home/ubuntu/data/wordpress
+    - /home/ubuntu/data/mariadb
+
+- name: Install rsync on server
+  ansible.builtin.apt:
+    name: rsync
+    state: present
+    update_cache: true
+
+- name: Sync srcs/ to /home/ubuntu/inception/ on the server
+  ansible.builtin.synchronize:
+    src: "{{ local_src_dir }}/"
+    dest: /home/ubuntu/inception/
+    recursive: true
+    delete: true
+  delegate_to: localhost
+  become: false
+
+    #- name: Run docker compose up (build + detached)
+    #ansible.builtin.command:
+    #cmd: docker compose up -d --build
+    #chdir: /srv/inception

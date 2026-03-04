@@ -29,6 +29,4 @@ ping:
 bootstrap:
 	ANSIBLE_CONFIG=$(ANSIBLE_CFG) ansible-playbook ansible/playbooks/ws.yml
 
-all: tf-init tf-apply inventory bootstrap
-
-.PHONY: tf-init tf-plan tf-apply tf-destroy inventory ping bootstrap all
+.PHONY: tf-init tf-plan tf-apply tf-destroy inventory ping bootstrap
