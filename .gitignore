@@ -24,3 +24,9 @@ override.tf.json
 # CLI configuration files
 .terraformrc
 terraform.rc
+
+# keys
+*/*.pem
+
+# variables
+*/.env
