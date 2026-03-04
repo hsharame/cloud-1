@@ -1,0 +1,6 @@
+#host IP address in CIDR format (/32 to allow only one address)
+ip_public =
+#key created in the same region as the target EC2 instance 
+#(EC2 -> Network & Security -> Key pairs)
+#Type: RSA, file format: .pem
+key_name =
