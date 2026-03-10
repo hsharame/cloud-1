@@ -2,10 +2,11 @@
 
 set -e
 
-sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = 9000|" /etc/php/7.4/fpm/pool.d/www.conf
-sed -i 's/;daemonize = yes/daemonize = no/' /etc/php/7.4/fpm/php-fpm.conf
-
 cd /var/www/wordpress
+
+until mariadb -h"${DB_HOST}" -u"${SQL_USER}" -p"${SQL_PASSWORD}" -e "SELECT 1;" >/dev/null 2>&1; do
+    sleep 2
+done
 
 if [ ! -f wp-config.php ] ; then
 	wp config create \
@@ -32,5 +33,3 @@ if ! wp core is-installed --allow-root; then
 		--allow-root \
 		--path='/var/www/wordpress'
 fi
-
-php-fpm7.4 -F -R --nodaemonize
