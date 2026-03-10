@@ -16,6 +16,6 @@ variable "ip_public" {
 }
 
 variable "key_name" {
-  description	= "Key for SSH connection"
-  type 		= string
+  description = "Key for SSH connection"
+  type        = string
 }

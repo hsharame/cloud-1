@@ -25,8 +25,8 @@ data "aws_subnets" "default" {
 }
 
 resource "aws_security_group" "ws_sg" {
-  name        = "ws-sg"
-  vpc_id      = data.aws_vpc.default.id
+  name   = "ws-sg"
+  vpc_id = data.aws_vpc.default.id
 
   ingress {
     description = "SSH"
@@ -61,16 +61,16 @@ resource "aws_security_group" "ws_sg" {
 }
 
 resource "aws_instance" "ws" {
-	ami		= data.aws_ami.ubuntu_22_04.id
-	instance_type	= var.instance_type
-	
-	key_name	= var.key_name
+  ami           = data.aws_ami.ubuntu_22_04.id
+  instance_type = var.instance_type
 
-	subnet_id	= data.aws_subnets.default.ids[0]
-	vpc_security_group_ids = [aws_security_group.ws_sg.id]
-	associate_public_ip_address = true
-	
-	tags = {
-	  Name = "web-server"
-	}
+  key_name = var.key_name
+
+  subnet_id                   = data.aws_subnets.default.ids[0]
+  vpc_security_group_ids      = [aws_security_group.ws_sg.id]
+  associate_public_ip_address = true
+
+  tags = {
+    Name = "web-server"
+  }
 }
