@@ -7,7 +7,8 @@ RUN     apt update && apt install -y \
         mariadb-client \
         && rm -rf /var/lib/apt/lists/*
 
-RUN	wget https://fr.wordpress.org/wordpress-6.8-fr_FR.tar.gz -P /tmp \
+RUN	mkdir -p /var/www \
+	&& wget https://fr.wordpress.org/wordpress-6.8-fr_FR.tar.gz -P /tmp \
     	&& tar -xzf /tmp/wordpress-6.8-fr_FR.tar.gz -C /var/www \
     	&& rm /tmp/wordpress-6.8-fr_FR.tar.gz \
     	&& chown -R www-data:www-data /var/www/wordpress

@@ -7,7 +7,8 @@ RUN	apt update && apt install -y \
 	php-mysql \
 	&& rm -rf /var/lib/apt/lists/* 
 	
-RUN	wget https://fr.wordpress.org/wordpress-6.8-fr_FR.tar.gz -P /var/www \
+RUN	mkdir -p /var/www \
+	&& wget https://fr.wordpress.org/wordpress-6.8-fr_FR.tar.gz -P /var/www \
 	&& cd /var/www && tar -xzf wordpress-6.8-fr_FR.tar.gz \
 	&& rm wordpress-6.8-fr_FR.tar.gz \
 	&& chown -R www-data:www-data /var/www/wordpress

@@ -15,6 +15,9 @@ tf-destroy:
 	terraform -chdir=terraform destroy
 
 inventory:
+	@if [ $$(wc -l < $(INVENTORY_FILE)) -gt 1 ]; then \
+		head -n 1 $(INVENTORY_FILE) > file.tmp && mv file.tmp $(INVENTORY_FILE); \
+	fi
 	@IP=$$(terraform -chdir=terraform output -raw public_ip 2>/dev/null); \
 	if [[ -z "$$IP" ]]; then \
 		echo "ERROR: public_ip output is empty."; \
