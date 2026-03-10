@@ -1,4 +1,4 @@
-FROM	debian:11.11
+FROM	debian:bookworm
 
 RUN	apt-get update && apt-get install -y \
 	nginx \
@@ -13,7 +13,7 @@ RUN	apt-get update && apt-get install -y \
 	-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=hsharame.42.fr/UID=hsharame" \
 	&& rm -rf /var/lib/apt/lists/*
 
-COPY	conf/nginx.conf /etc/nginx/conf.d
+COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE	443
 

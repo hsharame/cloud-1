@@ -20,7 +20,6 @@ inventory:
 		echo "ERROR: public_ip output is empty."; \
 		exit 1; \
 	fi; \
-	echo "[web]" > $(INVENTORY_FILE); \
 	echo "$$IP" >> $(INVENTORY_FILE)
 
 ping:
