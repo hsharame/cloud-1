@@ -13,7 +13,7 @@ services:
       - inception
     ports:
       - "443:443"
-    restart: on-failure
+    restart: always
 
   mariadb:
     container_name: mariadb
@@ -41,7 +41,7 @@ services:
       - inception
     expose:
       - "9000"
-    restart: on-failure
+    restart: always
 
 
   wordpress-init:

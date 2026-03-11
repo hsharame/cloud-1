@@ -33,3 +33,18 @@ if ! wp core is-installed --allow-root; then
 		--allow-root \
 		--path='/var/www/wordpress'
 fi
+
+
+if ! wp post get 1 --field=post_title --allow-root | grep -q "awesome"; then
+    	IMAGE_ID=$(wp media import /tmp/cat.jpg --porcelain --allow-root)
+	IMAGE_URL=$(wp post get "$IMAGE_ID" --field=guid --allow-root)
+
+	wp post update 1 \
+        	--post_title="My awesome Inception" \
+        	--comment_status=open \
+        	--post_content="<h1>WOOSH!</h1>
+	<p>You have a WordPress blog automatically deployed in the cloud using Terraform and Ansible.</p>
+	<p><img src=\"$IMAGE_URL\"></p>
+	<p><a href=\"/wp-login.php\">Log in</a></p>" \
+        	--allow-root
+fi

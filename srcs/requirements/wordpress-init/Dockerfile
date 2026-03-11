@@ -4,6 +4,7 @@ RUN     apt update && apt install -y \
         wget \
         php-cli \
         php-mysql \
+	php-gd \
         mariadb-client \
         && rm -rf /var/lib/apt/lists/*
 
@@ -18,6 +19,8 @@ RUN     wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cl
         && mv wp-cli.phar /usr/local/bin/wp
 
 COPY    tools/auto-config.sh /usr/local/bin/auto-config.sh
+
+COPY	tools/cat.jpg /tmp/cat.jpg
 
 RUN     chmod +x /usr/local/bin/auto-config.sh
 
