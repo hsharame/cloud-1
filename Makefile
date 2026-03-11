@@ -26,9 +26,9 @@ inventory:
 	echo "$$IP" >> $(INVENTORY_FILE)
 
 ping:
-	ANSIBLE_CONFIG=$(ANSIBLE_CFG) ansible web -m ping
+	ANSIBLE_CONFIG=$(ANSIBLE_CFG) ansible web -m ping --ask-vault-pass
 
 bootstrap:
-	ANSIBLE_CONFIG=$(ANSIBLE_CFG) ansible-playbook ansible/playbooks/ws.yml
+	ANSIBLE_CONFIG=$(ANSIBLE_CFG) ansible-playbook ansible/playbooks/ws.yml --ask-vault-pass
 
 .PHONY: tf-init tf-plan tf-apply tf-destroy inventory ping bootstrap
