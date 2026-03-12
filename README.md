@@ -14,15 +14,20 @@ Sensitive data required by Ansible is stored securely using **Ansible Vault**, w
 
 2. Export your AWS credentials (access keys). To create an AWS access key: go to IAM → Users → select your user → Security credentials → Access keys → Create access key, then choose Local code.
 
-3. Configure the **_.env_** file in the ```srcs/``` directory.
 
-4. From the root folder, run the following commands: ```make tf-init```, ```make tf-plan```, and ```make tf-apply```.
+   ```export AWS_ACCESS_KEY_ID="<anaccesskey>"```
+   
+   ```export AWS_SECRET_ACCESS_KEY="<asecretkey>"```
 
-5. Generate the Ansible inventory with ```make inventory```.
+4. Configure the **_.env_** file in the ```srcs/``` directory.
 
-6. Check the connection with ```make ping```. You will be asked for the Ansible Vault password, just like in the next step.
+5. From the root folder, run the following commands: ```make tf-init```, ```make tf-plan```, and ```make tf-apply```.
 
-7. Run ```make bootstrap``` to start the provisioning process.
+6. Generate the Ansible inventory with ```make inventory```.
+
+7. Check the connection with ```make ping```. You will be asked for the Ansible Vault password, just like in the next step.
+
+8. Run ```make bootstrap``` to start the provisioning process.
 
 ## Accessing the deployed website
 
