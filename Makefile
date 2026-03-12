@@ -11,13 +11,13 @@ tf-plan:
 tf-apply:
 	terraform -chdir=terraform apply
 
-tf-destroy:
+destroy:
+	@if [ $$(wc -l < $(INVENTORY_FILE)) -gt 1 ]; then \
+                head -n 1 $(INVENTORY_FILE) > file.tmp && mv file.tmp $(INVENTORY_FILE); \
+	fi
 	terraform -chdir=terraform destroy
 
 inventory:
-	@if [ $$(wc -l < $(INVENTORY_FILE)) -gt 1 ]; then \
-		head -n 1 $(INVENTORY_FILE) > file.tmp && mv file.tmp $(INVENTORY_FILE); \
-	fi
 	@IP=$$(terraform -chdir=terraform output -raw public_ip 2>/dev/null); \
 	if [[ -z "$$IP" ]]; then \
 		echo "ERROR: public_ip output is empty."; \
@@ -31,4 +31,4 @@ ping:
 bootstrap:
 	ANSIBLE_CONFIG=$(ANSIBLE_CFG) ansible-playbook ansible/playbooks/ws.yml --ask-vault-pass
 
-.PHONY: tf-init tf-plan tf-apply tf-destroy inventory ping bootstrap
+.PHONY: tf-init tf-plan tf-apply destroy inventory ping bootstrap
